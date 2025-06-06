@@ -5,9 +5,9 @@ import 'question_answer_state.dart';
 
 class QuestionAnswerBloc
     extends Bloc<QuestionAnswerEvent, QuestionAnswerState> {
-  QuestionAnswerBloc() : super(InitialAnswer()) {
+  QuestionAnswerBloc() : super(InitialAnswerState()) {
     on<UpdateAnswerEvent>((event, emit) {
-      emit(UpdatedAnswer(selectedOption: event.selectedOption));
+      emit(UpdatedAnswerState(selectedOption: event.selectedOption));
     });
   }
 }

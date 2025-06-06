@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stroll_interview/bloc/next%20question/next_question_bloc.dart';
 import 'package:stroll_interview/bloc/question_answer/question_answer_bloc.dart';
 import 'package:stroll_interview/screens/screen1.dart';
 
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => QuestionAnswerBloc())],
+      providers: [
+        BlocProvider(create: (context) => QuestionAnswerBloc()),
+        BlocProvider(create: (context) => NextQuestionBloc()),
+      ],
       child: MaterialApp(
         // title: 'Flutter Demo',
         themeMode: ThemeMode.dark,

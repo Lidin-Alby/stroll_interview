@@ -1,9 +1,9 @@
 abstract class QuestionAnswerState {}
 
-class InitialAnswer extends QuestionAnswerState {}
+class InitialAnswerState extends QuestionAnswerState {}
 
-class UpdatedAnswer extends QuestionAnswerState {
+class UpdatedAnswerState extends QuestionAnswerState {
   final String selectedOption;
 
-  UpdatedAnswer({required this.selectedOption});
+  UpdatedAnswerState({required this.selectedOption});
 }

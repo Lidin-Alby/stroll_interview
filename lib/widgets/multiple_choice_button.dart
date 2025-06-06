@@ -20,7 +20,7 @@ class MultipleChoiceButton extends StatelessWidget {
     return BlocBuilder<QuestionAnswerBloc, QuestionAnswerState>(
       builder: (context, state) {
         String? selectedAnswer;
-        if (state is UpdatedAnswer) {
+        if (state is UpdatedAnswerState) {
           selectedAnswer = state.selectedOption;
         }
         return Material(
@@ -43,44 +43,49 @@ class MultipleChoiceButton extends StatelessWidget {
                 color: Color.fromRGBO(35, 42, 46, 1),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 20,
-                    height: 20,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color:
-                          selectedAnswer == value
-                              ? Theme.of(context).colorScheme.primary
-                              : null,
-                      border:
-                          selectedAnswer == value
-                              ? null
-                              : Border.all(
-                                color: Color.fromRGBO(196, 196, 196, 1),
-                              ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      optionLabel,
-                      style: TextStyle(
-                        fontSize: 12,
+              child: Container(
+                constraints: BoxConstraints(minHeight: 40),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 20,
+                      height: 20,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
                         color:
                             selectedAnswer == value
-                                ? Colors.white
-                                : Color.fromRGBO(196, 196, 196, 1),
+                                ? Theme.of(context).colorScheme.primary
+                                : null,
+                        border:
+                            selectedAnswer == value
+                                ? null
+                                : Border.all(
+                                  color: Color.fromRGBO(196, 196, 196, 1),
+                                ),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        optionLabel,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color:
+                              selectedAnswer == value
+                                  ? Colors.white
+                                  : Color.fromRGBO(196, 196, 196, 1),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      optionText,
-                      style: TextStyle(color: Color.fromRGBO(196, 196, 196, 1)),
+                    SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        optionText,
+                        style: TextStyle(
+                          color: Color.fromRGBO(196, 196, 196, 1),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

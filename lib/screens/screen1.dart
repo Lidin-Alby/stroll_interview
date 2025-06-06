@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stroll_interview/bloc/next%20question/next_question_bloc.dart';
+import 'package:stroll_interview/bloc/next%20question/next_question_event.dart';
+import 'package:stroll_interview/bloc/next%20question/next_question_state.dart';
 import 'package:stroll_interview/models/my_icon.dart';
+import 'package:stroll_interview/models/question_answer.dart';
 import 'package:stroll_interview/widgets/bottom_navigation_button.dart';
 import 'package:stroll_interview/widgets/multiple_choice_button.dart';
 
@@ -8,6 +13,16 @@ class Screen1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<QuestionAnswer> questionAnswers = [
+      QuestionAnswer(
+        option1: 'The peace in the early mornings',
+        option2: 'The magical golden hours',
+        option3: 'Wind-down time after dinners',
+        option4: 'The serinity past midnight',
+        givenAnswer: 'Mine is definitely the peace in the morning.',
+        question: 'What is your favourite time of day?',
+      ),
+    ];
     return Scaffold(
       body: Stack(
         children: [
@@ -74,18 +89,16 @@ class Screen1 extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Container(
-                            child: Icon(
-                              shadows: [
-                                BoxShadow(
-                                  blurRadius: 5,
-                                  offset: Offset(0, .3),
-                                  color: Color.fromRGBO(0, 0, 0, 0.2),
-                                ),
-                              ],
-                              Icons.keyboard_arrow_down_rounded,
-                              color: Color.fromRGBO(203, 201, 255, 1),
-                            ),
+                          Icon(
+                            shadows: [
+                              BoxShadow(
+                                blurRadius: 5,
+                                offset: Offset(0, .3),
+                                color: Color.fromRGBO(0, 0, 0, 0.2),
+                              ),
+                            ],
+                            Icons.keyboard_arrow_down_rounded,
+                            color: Color.fromRGBO(203, 201, 255, 1),
                           ),
                         ],
                       ),
@@ -133,143 +146,167 @@ class Screen1 extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(12),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundImage: AssetImage(
-                                'assets/images/Joey.jpg',
-                              ),
-                              radius: 25,
-                            ),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height: 5),
-                                  Text(
-                                    'Angelina, 28',
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(245, 245, 245, 1),
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                  child: BlocBuilder<NextQuestionBloc, NextQuestionState>(
+                    builder: (context, state) {
+                      int index = state.index;
+
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                    'assets/images/Joey.jpg',
                                   ),
-                                  SizedBox(height: 10),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8),
-                                    child: Text(
-                                      'What is your favourite time of day?',
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(245, 245, 245, 1),
-                                        height: 1,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                  radius: 25,
+                                ),
+                                SizedBox(width: 10),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: 5),
+                                      Text(
+                                        'Angelina, 28',
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(
+                                            245,
+                                            245,
+                                            245,
+                                            1,
+                                          ),
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
+                                      SizedBox(height: 10),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: Text(
+                                          questionAnswers[index].question,
+                                          style: TextStyle(
+                                            color: Color.fromRGBO(
+                                              245,
+                                              245,
+                                              245,
+                                              1,
+                                            ),
+                                            height: 1,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 12),
+                            child: Text(
+                              '"${questionAnswers[index].givenAnswer}"',
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontSize: 12,
+                                color: Color.fromRGBO(203, 201, 255, 0.7),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        child: Text(
-                          '"Mine is definitely the peace in the morning."',
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontSize: 12,
-                            color: Color.fromRGBO(203, 201, 255, 0.7),
                           ),
-                        ),
-                      ),
-                      Row(
-                        spacing: 12,
-                        children: [
-                          Expanded(
-                            child: MultipleChoiceButton(
-                              optionLabel: 'A',
-                              optionText: 'The peace in the early mornings',
-                              value: 'A',
-                            ),
-                          ),
-                          Expanded(
-                            child: MultipleChoiceButton(
-                              optionLabel: 'B',
-                              optionText: 'The magical golden hours',
-                              value: 'B',
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 12),
-                      Row(
-                        spacing: 12,
-                        children: [
-                          Expanded(
-                            child: MultipleChoiceButton(
-                              optionLabel: 'C',
-                              optionText: 'Wind-down time after dinners',
-                              value: 'C',
-                            ),
-                          ),
-                          Expanded(
-                            child: MultipleChoiceButton(
-                              optionLabel: 'D',
-                              optionText: 'The serinity past midnight',
-                              value: 'D',
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      Row(
-                        children: [
-                          Text(
-                            'Pick your option.\nSee who has a similar mind.',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color.fromRGBO(229, 229, 229, 1),
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 2,
-                                color: Theme.of(context).colorScheme.primary,
+                          Row(
+                            spacing: 12,
+                            children: [
+                              Expanded(
+                                child: MultipleChoiceButton(
+                                  optionLabel: 'A',
+                                  optionText: questionAnswers[index].option1,
+                                  value: 'A',
+                                ),
                               ),
-                              shape: BoxShape.circle,
-                            ),
-                            child: IconButton(
-                              iconSize: 33,
-                              onPressed: () {},
-                              icon: Icon(Icons.mic),
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                              Expanded(
+                                child: MultipleChoiceButton(
+                                  optionLabel: 'B',
+                                  optionText: questionAnswers[index].option2,
+                                  value: 'B',
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(width: 8),
-                          IconButton.filled(
-                            iconSize: 36,
-                            onPressed: () {},
-                            icon: Icon(Icons.arrow_forward_rounded),
-                            style: IconButton.styleFrom(
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.primary,
-                            ),
+                          SizedBox(height: 12),
+                          Row(
+                            spacing: 12,
+                            children: [
+                              Expanded(
+                                child: MultipleChoiceButton(
+                                  optionLabel: 'C',
+                                  optionText: questionAnswers[index].option3,
+                                  value: 'C',
+                                ),
+                              ),
+                              Expanded(
+                                child: MultipleChoiceButton(
+                                  optionLabel: 'D',
+                                  optionText: questionAnswers[index].option4,
+                                  value: 'D',
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            children: [
+                              Text(
+                                'Pick your option.\nSee who has a similar mind.',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color.fromRGBO(229, 229, 229, 1),
+                                ),
+                              ),
+                              Spacer(),
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 2,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: IconButton(
+                                  iconSize: 33,
+                                  onPressed: () {},
+                                  icon: Icon(Icons.mic),
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              IconButton.filled(
+                                iconSize: 36,
+                                onPressed: () {
+                                  if (index != questionAnswers.length - 1) {
+                                    context.read<NextQuestionBloc>().add(
+                                      NextQuestion(),
+                                    );
+                                  }
+                                },
+                                icon: Icon(Icons.arrow_forward_rounded),
+                                style: IconButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ),
               ),
