@@ -67,6 +67,8 @@ flutter:
     - assets/icons/fire.svg
     - assets/icons/message.svg
     - assets/icons/poker-cards.svg
+    - assets/icons/mic.svg
+    - assets/icons/timer.svg
 
 
 

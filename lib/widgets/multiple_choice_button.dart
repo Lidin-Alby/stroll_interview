@@ -31,7 +31,7 @@ class MultipleChoiceButton extends StatelessWidget {
             },
             borderRadius: BorderRadius.circular(12),
             child: Ink(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               decoration: BoxDecoration(
                 border:
                     selectedAnswer == value
@@ -44,7 +44,7 @@ class MultipleChoiceButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Container(
-                constraints: BoxConstraints(minHeight: 40),
+                constraints: BoxConstraints(minHeight: 38),
                 child: Row(
                   children: [
                     Container(

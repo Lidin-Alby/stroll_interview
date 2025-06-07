@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:stroll_interview/bloc/next%20question/next_question_bloc.dart';
 import 'package:stroll_interview/bloc/next%20question/next_question_event.dart';
 import 'package:stroll_interview/bloc/next%20question/next_question_state.dart';
@@ -49,7 +50,7 @@ class Screen1 extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Color.fromRGBO(0, 0, 0, 0.5),
+                        Color.fromRGBO(0, 0, 0, 0.4),
                         Color.fromRGBO(0, 0, 0, 0.3),
 
                         Color.fromRGBO(0, 0, 0, 0),
@@ -69,7 +70,7 @@ class Screen1 extends StatelessWidget {
                           Text(
                             'Stroll Bonfire',
                             style: TextStyle(
-                              color: Color.fromRGBO(179, 173, 246, 1),
+                              color: Color.fromRGBO(204, 200, 255, 1),
                               shadows: [
                                 BoxShadow(
                                   blurRadius: 2,
@@ -89,16 +90,19 @@ class Screen1 extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Icon(
-                            shadows: [
-                              BoxShadow(
-                                blurRadius: 5,
-                                offset: Offset(0, .3),
-                                color: Color.fromRGBO(0, 0, 0, 0.2),
-                              ),
-                            ],
-                            Icons.keyboard_arrow_down_rounded,
-                            color: Color.fromRGBO(203, 201, 255, 1),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6.0, left: 3),
+                            child: Icon(
+                              shadows: [
+                                BoxShadow(
+                                  blurRadius: 5,
+                                  offset: Offset(0, .3),
+                                  color: Color.fromRGBO(0, 0, 0, 0.2),
+                                ),
+                              ],
+                              Icons.keyboard_arrow_down_rounded,
+                              color: Color.fromRGBO(203, 201, 255, 1),
+                            ),
                           ),
                         ],
                       ),
@@ -106,14 +110,54 @@ class Screen1 extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         // crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Icon(Icons.timer_outlined, size: 14),
-                          SizedBox(width: 2),
+                          SvgPicture.asset('assets/icons/timer.svg'),
+                          SizedBox(width: 3),
 
-                          Text('22h 00m', style: TextStyle(fontSize: 12)),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Text(
+                              '22h 00m',
+                              style: TextStyle(
+                                fontSize: 12,
+                                shadows: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(0, 0, 0, 0.2),
+                                    blurRadius: 4,
+                                    offset: Offset(0, 1),
+                                  ),
+                                  BoxShadow(
+                                    color: Color.fromRGBO(0, 0, 0, 0.3),
+                                    blurRadius: 1,
+                                    offset: Offset(0, 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                           SizedBox(width: 10),
-                          Icon(Icons.person_outline, size: 14),
-                          SizedBox(width: 2),
-                          Text('103', style: TextStyle(fontSize: 12)),
+                          SvgPicture.asset(myIcons[MyIcon.user]),
+                          SizedBox(width: 3),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Text(
+                              '103',
+                              style: TextStyle(
+                                fontSize: 12,
+                                shadows: [
+                                  BoxShadow(
+                                    color: Color.fromRGBO(0, 0, 0, 0.2),
+                                    blurRadius: 4,
+                                    offset: Offset(0, 1),
+                                  ),
+                                  BoxShadow(
+                                    color: Color.fromRGBO(0, 0, 0, 0.3),
+                                    blurRadius: 1,
+                                    offset: Offset(0, 1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -134,6 +178,7 @@ class Screen1 extends StatelessWidget {
                       Color.fromRGBO(0, 0, 0, 0.0),
                       Color.fromRGBO(0, 0, 0, 0.7),
                       Color.fromRGBO(0, 0, 0, 0.8),
+                      Color.fromRGBO(0, 0, 0, 0.8),
 
                       Color.fromRGBO(0, 0, 0, 0.9),
                       Color.fromRGBO(0, 0, 0, 0.9),
@@ -145,7 +190,10 @@ class Screen1 extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
                   child: BlocBuilder<NextQuestionBloc, NextQuestionState>(
                     builder: (context, state) {
                       int index = state.index;
@@ -220,6 +268,7 @@ class Screen1 extends StatelessWidget {
                               ),
                             ),
                           ),
+                          SizedBox(height: 3),
                           Row(
                             spacing: 12,
                             children: [
@@ -259,7 +308,7 @@ class Screen1 extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 15),
+                          SizedBox(height: 12),
                           Row(
                             children: [
                               Text(
@@ -282,7 +331,9 @@ class Screen1 extends StatelessWidget {
                                 child: IconButton(
                                   iconSize: 33,
                                   onPressed: () {},
-                                  icon: Icon(Icons.mic),
+                                  icon: SvgPicture.asset(
+                                    'assets/icons/mic.svg',
+                                  ),
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
@@ -302,6 +353,7 @@ class Screen1 extends StatelessWidget {
                                       Theme.of(context).colorScheme.primary,
                                 ),
                               ),
+                              SizedBox(width: 5),
                             ],
                           ),
                         ],
