@@ -167,25 +167,22 @@ class Screen1 extends StatelessWidget {
 
               Container(
                 alignment: Alignment.bottomCenter,
-                padding: EdgeInsets.only(top: 40),
+                padding: EdgeInsets.only(top: 70),
 
                 decoration: BoxDecoration(
                   color: Colors.black,
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
+                    stops: [0.05, 0.2, 0.3, 1, 1],
                     colors: [
                       Color.fromRGBO(0, 0, 0, 0.0),
                       Color.fromRGBO(0, 0, 0, 0.7),
-                      Color.fromRGBO(0, 0, 0, 0.8),
-                      Color.fromRGBO(0, 0, 0, 0.8),
+
+                      Color.fromRGBO(0, 0, 0, 1),
 
                       Color.fromRGBO(0, 0, 0, 0.9),
-                      Color.fromRGBO(0, 0, 0, 0.9),
-
-                      Color.fromRGBO(0, 0, 0, 0.9),
-                      Color.fromRGBO(0, 0, 0, 0.9),
-                      Color.fromRGBO(0, 0, 0, 0.9),
+                      Color.fromRGBO(0, 0, 0, 0.1),
                     ],
                   ),
                 ),
